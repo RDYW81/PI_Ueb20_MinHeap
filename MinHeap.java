@@ -79,81 +79,30 @@ public class MinHeap<T> implements java.util.Queue<T>
         return result;
     }
 
-    @Override
-    public boolean add(T t) {
-        return false;
+    private void swap(int i, int j) {
+        int t = a[i];
+        a[i] = a[j];
+        a[j] = t;
     }
 
     @Override
-    public boolean remove(Object o) {
-        return false;
-    }
-
-    @Override
-    public boolean containsAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean addAll(Collection<? extends T> c) {
-        return false;
-    }
-
-    @Override
-    public boolean removeAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public boolean retainAll(Collection<?> c) {
-        return false;
-    }
-
-    @Override
-    public void clear() {
-
-    }
-
-    @Override
-    public boolean offer(T t) {
-        return false;
-    }
-
-    @Override
-    public T remove() {
-        return null;
-    }
-
-    @Override
-    public T poll() {
-        return null;
-    }
-
-    @Override
-    public T element() {
-        return null;
-    }
-
-    public int peek() {
-        return a[0];
-    }
-
     public int size() {
-        return n;
+        throw new java.lang.UnsupportedOperationException();
     }
 
+    @Override
     public boolean isEmpty() {
-        return (n == 0);
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public boolean contains(Object o) {
-        return false;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
@@ -163,14 +112,66 @@ public class MinHeap<T> implements java.util.Queue<T>
 
     @Override
     public <T1> T1[] toArray(T1[] a) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean add(T t) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean remove(Object o) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public void clear() {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public boolean offer(T t) {
+        return false;
+    }
+
+    @Override
+    public T remove() {
+        throw new java.lang.UnsupportedOperationException();
+    }
+
+    @Override
+    public T poll() {
         return null;
     }
 
-    private void swap(int i, int j) {
-        int t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+    @Override
+    public T element() {
+        throw new java.lang.UnsupportedOperationException();
     }
 
+    @Override
+    public T peek() {
+        return null;
+    }
 }
-ok
