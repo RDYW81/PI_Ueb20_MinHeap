@@ -22,7 +22,12 @@ public class MinHeap<T> implements java.util.Queue<T>
         a = new int[size];
         n = 0;
     }
-
+    
+    /**
+     * Fügt einen Wert vom Typ int in den MinHeap ein und berücksichtigt die MinHeap-Eigenschaften
+     * 
+     * @param k einzugebender Wert
+     */
     public void enqueue(int k) {
         // Wert in Array einfÃ¼gen
         a[n] = k;
@@ -44,6 +49,10 @@ public class MinHeap<T> implements java.util.Queue<T>
         }
     }
 
+    
+    /**
+     * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
+     */
     public int dequeue() {
         int result = a[0];
 
@@ -79,6 +88,9 @@ public class MinHeap<T> implements java.util.Queue<T>
         return result;
     }
 
+    /**
+     * Methode, die bei verletzter Heap-Eigenschaft aufgerufen wird und die Werte des MinHeaps umtauscht
+     */
     private void swap(int i, int j) {
         int t = a[i];
         a[i] = a[j];
@@ -107,7 +119,7 @@ public class MinHeap<T> implements java.util.Queue<T>
 
     @Override
     public Object[] toArray() {
-        return new Object[0];
+        throw new java.lang.UnsupportedOperationException();
     }
 
     @Override
