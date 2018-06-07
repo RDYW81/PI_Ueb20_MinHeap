@@ -77,6 +77,31 @@ public class MinHeap implements java.util.Queue<T>
         return result;
     }
 
+    @Override
+    public boolean add(T t) {
+        return false;
+    }
+
+    @Override
+    public boolean offer(T t) {
+        return false;
+    }
+
+    @Override
+    public T remove() {
+        return null;
+    }
+
+    @Override
+    public T poll() {
+        return null;
+    }
+
+    @Override
+    public T element() {
+        return null;
+    }
+
     public int peek() {
         return a[0];
     }
@@ -94,5 +119,6 @@ public class MinHeap implements java.util.Queue<T>
         a[i] = a[j];
         a[j] = t;
     }
+
 
 }
