@@ -1,3 +1,5 @@
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Beschreiben Sie hier die Klasse MinHeap.
@@ -5,7 +7,7 @@
  * @author Roland Daidone, Michael Linn
  * @version 0.1
  */
-public class MinHeap implements java.util.Queue<T>
+public class MinHeap<T> implements java.util.Queue<T>
 {
     // Instanzvariablen
     private int a[];
@@ -83,6 +85,36 @@ public class MinHeap implements java.util.Queue<T>
     }
 
     @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends T> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
     public boolean offer(T t) {
         return false;
     }
@@ -114,11 +146,30 @@ public class MinHeap implements java.util.Queue<T>
         return (n == 0);
     }
 
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T1> T1[] toArray(T1[] a) {
+        return null;
+    }
+
     private void swap(int i, int j) {
         int t = a[i];
         a[i] = a[j];
         a[j] = t;
     }
-
 
 }
