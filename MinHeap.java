@@ -12,24 +12,24 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
     // Instanzvariablen
     private Object[] array;
     private int size;
-    private static final int SIZE10 = 10;
+    // private static final int SIZE10 = 10;
      /**
      * Konstruktor für Objekte der Klasse MinHeap
      */
     public MinHeap() {
         double test;
         // Instanzvariable initialisieren
-        array =  new Object[SIZE10];
+        array =  new Object[0];
         size = 0;
     }
 
     /**
      * Methode, die bei verletzter Heap-Eigenschaft aufgerufen wird und die Werte des MinHeaps umtauscht
      */
-    private void swap(int i, int j) {
-        Object t = array[i];
-        array[i] = array[j];
-        array[j] = t;
+    private void swap(int index, int j) {
+        Object temp = array[index];
+        array[index] = array[j];
+        array[j] = temp;
     }
 
     /**
@@ -44,15 +44,15 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
         size++;
 
         // Heap-Eigenschaft wiederherstellen
-        int i = size - 1;
-        while (i > 0) {
+        int index = size - 1;
+        while (index > 0) {
             // Elternknoten bestimmen
-            int p = (i - 1) / 2;
+            int pos = (index - 1) / 2;
 
             // Heap-Eigenschaft verletzt?
-            if (((E) array[i]).compareTo((E) array[p]) < 0) {
-                swap(i, p);
-                i = p;
+            if (((E) array[index]).compareTo((E) array[pos]) < 0) {
+                swap(index, pos);
+                index = pos;
             } else {
                 break;
             }
@@ -71,25 +71,25 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
         size--;
 
         // Heap-Eigenschaft wiederherstellen
-        int i = 0;
-        while (i < size / 2 - 2) {
+        int index = 0;
+        while (index < size / 2 - 2) {
 
             // Linker Kindknoten
-            int l = 2 * i + 1;
+            int left = 2 * index + 1;
 
             // Rechter Kindknoten
-            int r = 2 * i + 2;
+            int right = 2 * index + 2;
 
             // Kleinerer Kindknoten
-            int c = l;
-            if (((E) array[r]).compareTo((E) array[l]) < 0) {
-                c = r;
+            int c = left;
+            if (((E) array[right]).compareTo((E) array[left]) < 0) {
+                c = right;
             }
 
             // Heap-Eigenschaft verletzt?
-            if (((E) array[c]).compareTo((E) array[i]) < 0) {
-                swap(c, i);
-                i = c;
+            if (((E) array[c]).compareTo((E) array[index]) < 0) {
+                swap(c, index);
+                index = c;
             } else {
                 break;
             }
