@@ -1,5 +1,5 @@
-import java.util.Collection;
-import java.util.Iterator;
+import java.util.*;
+
 
 /**
  * Beschreiben Sie hier die Klasse MinHeap.
@@ -7,22 +7,20 @@ import java.util.Iterator;
  * @author Roland Daidone, Michael Linn
  * @version 0.3
  */
-public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
+public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
 {
     // Instanzvariablen
     private Object[] array;
-
-    private int n;
-    private int s;
-    
+    private int size;
+    private static final int SIZE10 = 10;
      /**
      * Konstruktor für Objekte der Klasse MinHeap
      */
-    public MinHeap(int size) {
+    public MinHeap() {
+        double test;
         // Instanzvariable initialisieren
-        array = new Object[size];
-        n = 0;
-        this.s = size;
+        array =  new Object[SIZE10];
+        size = 0;
     }
 
     /**
@@ -32,6 +30,82 @@ public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
         Object t = array[i];
         array[i] = array[j];
         array[j] = t;
+    }
+
+    /**
+     * Fügt einen Wert vom Typ int in den MinHeap ein und berücksichtigt die MinHeap-Eigenschaften
+     *
+     * @param e einzugebender Wert
+     */
+    @Override
+    public boolean offer(E e) {
+        // Wert in Array einfügen
+        array[size] = e;
+        size++;
+
+        // Heap-Eigenschaft wiederherstellen
+        int i = size - 1;
+        while (i > 0) {
+            // Elternknoten bestimmen
+            int p = (i - 1) / 2;
+
+            // Heap-Eigenschaft verletzt?
+            if (((E) array[i]).compareTo((E) array[p]) < 0) {
+                swap(i, p);
+                i = p;
+            } else {
+                break;
+            }
+        }
+        return true;
+    }
+    /**
+     * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
+     */
+    @Override
+    public E poll() {
+        E result = (E) array[0];
+
+        // Ersten Wert aus Array entfernen
+        swap(0, size - 1);
+        size--;
+
+        // Heap-Eigenschaft wiederherstellen
+        int i = 0;
+        while (i < size / 2 - 2) {
+
+            // Linker Kindknoten
+            int l = 2 * i + 1;
+
+            // Rechter Kindknoten
+            int r = 2 * i + 2;
+
+            // Kleinerer Kindknoten
+            int c = l;
+            if (((E) array[r]).compareTo((E) array[l]) < 0) {
+                c = r;
+            }
+
+            // Heap-Eigenschaft verletzt?
+            if (((E) array[c]).compareTo((E) array[i]) < 0) {
+                swap(c, i);
+                i = c;
+            } else {
+                break;
+            }
+        }
+
+        return result;
+    }
+
+    @Override
+    public E peek() {
+        if (size >= 0)
+            return null;
+        return (E)array[0];
+    }
+    public int getSize(){
+        return size;
     }
 
     @Override
@@ -50,7 +124,7 @@ public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
     }
 
     @Override
-    public Iterator<T> iterator() {
+    public Iterator<E> iterator() {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -65,7 +139,7 @@ public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
     }
 
     @Override
-    public boolean add(T t) {
+    public boolean add(E e) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -80,7 +154,7 @@ public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
     }
 
     @Override
-    public boolean addAll(Collection<? extends T> c) {
+    public boolean addAll(Collection<? extends E> c) {
         throw new java.lang.UnsupportedOperationException();
     }
 
@@ -99,85 +173,16 @@ public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
         throw new java.lang.UnsupportedOperationException();
     }
 
-    /**
-     * Fügt einen Wert vom Typ int in den MinHeap ein und berücksichtigt die MinHeap-Eigenschaften
-     * 
-     * @param k einzugebender Wert
-     */
-    @Override
-    public boolean offer(T k) {
-        // Wert in Array einfügen
-        array[n] = k;
-        n++;
-
-        // Heap-Eigenschaft wiederherstellen
-        int i = n - 1;
-        while (i > 0) {
-            // Elternknoten bestimmen
-            int p = (i - 1) / 2;
-
-            // Heap-Eigenschaft verletzt?
-            if (((T) array[i]).compareTo((T) array[p]) < 0) {
-                swap(i, p);
-                i = p;
-            } else {
-                break;
-            }
-        }
-        return true;
-    }
 
     @Override
-    public T remove() {
+    public E remove() {
         throw new java.lang.UnsupportedOperationException();
     }
 
-    /**
-     * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
-     */
-    @Override
-    public T poll() {
-        T result = (T) array[0];
-
-        // Ersten Wert aus Array entfernen
-        swap(0, n - 1);
-        n--;
-
-        // Heap-Eigenschaft wiederherstellen
-        int i = 0;
-        while (i < n / 2 - 2) {
-
-            // Linker Kindknoten
-            int l = 2 * i + 1;
-
-            // Rechter Kindknoten
-            int r = 2 * i + 2;
-
-            // Kleinerer Kindknoten
-            int c = l;
-            if (((T) array[r]).compareTo((T) array[l]) < 0) {
-                c = r;
-            }
-
-            // Heap-Eigenschaft verletzt?
-            if (((T) array[c]).compareTo((T) array[i]) < 0) {
-                swap(c, i);
-                i = c;
-            } else {
-                break;
-            }
-        }
-
-        return result;
-    }
 
     @Override
-    public T element() {
+    public E element() {
         throw new java.lang.UnsupportedOperationException();
-    }
-
-    @Override
-    public T peek() {
-        return null;
     }
 }
+
