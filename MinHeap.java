@@ -12,14 +12,14 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
     // Instanzvariablen
     private Object[] array;
     private int size;
-    // private static final int SIZE10 = 10;
+    private static final int S_ZEHN = 10;
      /**
      * Konstruktor für Objekte der Klasse MinHeap
      */
     public MinHeap() {
         double test;
         // Instanzvariable initialisieren
-        array =  new Object[0];
+        array =  new Object[S_ZEHN];
         size = 0;
     }
 
