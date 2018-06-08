@@ -5,96 +5,33 @@ import java.util.Iterator;
  * Beschreiben Sie hier die Klasse MinHeap.
  * 
  * @author Roland Daidone, Michael Linn
- * @version 0.1
+ * @version 0.3
  */
-public class MinHeap<T> implements java.util.Queue<T>
+public class MinHeap<T extends Comparable<T>> implements java.util.Queue<T>
 {
     // Instanzvariablen
-    private int a[];
+    private Object[] array;
 
     private int n;
-
+    private int s;
+    
      /**
      * Konstruktor für Objekte der Klasse MinHeap
      */
     public MinHeap(int size) {
         // Instanzvariable initialisieren
-        a = new int[size];
+        array = new Object[size];
         n = 0;
-    }
-    
-    /**
-     * Fügt einen Wert vom Typ int in den MinHeap ein und berücksichtigt die MinHeap-Eigenschaften
-     * 
-     * @param k einzugebender Wert
-     */
-    public void enqueue(int k) {
-        // Wert in Array einfÃ¼gen
-        a[n] = k;
-        n++;
-
-        // Heap-Eigenschaft wiederherstellen
-        int i = n - 1;
-        while (i > 0) {
-            // Elternknoten bestimmen
-            int p = (i - 1) / 2;
-
-            // Heap-Eigenschaft verletzt?
-            if (a[i] < a[p]) {
-                swap(i, p);
-                i = p;
-            } else {
-                break;
-            }
-        }
-    }
-
-    
-    /**
-     * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
-     */
-    public int dequeue() {
-        int result = a[0];
-
-        // Ersten Wert aus Array entfernen
-        swap(0, n - 1);
-        n--;
-
-        // Heap-Eigenschaft wiederherstellen
-        int i = 0;
-        while (i < n / 2 - 2) {
-
-            // Linker Kindknoten
-            int l = 2 * i + 1;
-
-            // Rechter Kindknoten
-            int r = 2 * i + 2;
-
-            // Kleinerer Kindknoten
-            int c = l;
-            if (a[r] < a[l]) {
-                c = r;
-            }
-
-            // Heap-Eigenschaft verletzt?
-            if (a[c] < a[i]) {
-                swap(c, i);
-                i = c;
-            } else {
-                break;
-            }
-        }
-
-        return result;
+        this.s = size;
     }
 
     /**
      * Methode, die bei verletzter Heap-Eigenschaft aufgerufen wird und die Werte des MinHeaps umtauscht
      */
     private void swap(int i, int j) {
-        int t = a[i];
-        a[i] = a[j];
-        a[j] = t;
+        Object t = array[i];
+        array[i] = array[j];
+        array[j] = t;
     }
 
     @Override
@@ -162,9 +99,32 @@ public class MinHeap<T> implements java.util.Queue<T>
         throw new java.lang.UnsupportedOperationException();
     }
 
+    /**
+     * Fügt einen Wert vom Typ int in den MinHeap ein und berücksichtigt die MinHeap-Eigenschaften
+     * 
+     * @param k einzugebender Wert
+     */
     @Override
-    public boolean offer(T t) {
-        return false;
+    public boolean offer(T k) {
+        // Wert in Array einfügen
+        array[n] = k;
+        n++;
+
+        // Heap-Eigenschaft wiederherstellen
+        int i = n - 1;
+        while (i > 0) {
+            // Elternknoten bestimmen
+            int p = (i - 1) / 2;
+
+            // Heap-Eigenschaft verletzt?
+            if (((T) array[i]).compareTo((T) array[p]) < 0) {
+                swap(i, p);
+                i = p;
+            } else {
+                break;
+            }
+        }
+        return true;
     }
 
     @Override
@@ -172,9 +132,43 @@ public class MinHeap<T> implements java.util.Queue<T>
         throw new java.lang.UnsupportedOperationException();
     }
 
+    /**
+     * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
+     */
     @Override
     public T poll() {
-        return null;
+        T result = (T) array[0];
+
+        // Ersten Wert aus Array entfernen
+        swap(0, n - 1);
+        n--;
+
+        // Heap-Eigenschaft wiederherstellen
+        int i = 0;
+        while (i < n / 2 - 2) {
+
+            // Linker Kindknoten
+            int l = 2 * i + 1;
+
+            // Rechter Kindknoten
+            int r = 2 * i + 2;
+
+            // Kleinerer Kindknoten
+            int c = l;
+            if (((T) array[r]).compareTo((T) array[l]) < 0) {
+                c = r;
+            }
+
+            // Heap-Eigenschaft verletzt?
+            if (((T) array[c]).compareTo((T) array[i]) < 0) {
+                swap(c, i);
+                i = c;
+            } else {
+                break;
+            }
+        }
+
+        return result;
     }
 
     @Override
