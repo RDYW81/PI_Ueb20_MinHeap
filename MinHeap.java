@@ -59,6 +59,7 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
         }
         return true;
     }
+    
     /**
      * Entfernt einen Wert vom Typ int in den MinHeap ein und stellt die MinHeap-Eigenschaften wieder her
      */
@@ -67,9 +68,14 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
         E result = (E) array[0];
 
         // Ersten Wert aus Array entfernen
-        swap(0, size - 1);
+       // swap(0, size - 1);
         size--;
-
+        if ( array[0] != null){
+            for (int i = 0 ; i<array.length-1; i++){
+                array[i] = array[i+1];
+            }
+            array[array.length-1] = null;
+        }
         // Heap-Eigenschaft wiederherstellen
         int index = 0;
         while (index < size / 2 - 2) {
@@ -100,10 +106,11 @@ public class MinHeap<E extends Comparable<E>> implements java.util.Queue<E>
 
     @Override
     public E peek() {
-        if (size >= 0)
+        if (size <= 0)
             return null;
         return (E)array[0];
     }
+    
     public int getSize(){
         return size;
     }
